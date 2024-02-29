@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Clásica",
+    "desc": "Una deliciosa hamburguesa con carne de res, queso, lechuga, tomate y cebolla.",
+    "price": 7500,
+    "img": "/bg1-removebg-preview.png"
+  },
+  {
+    "title": "Queso y tocino",
+    "desc": "Una hamburguesa con queso cheddar derretido y tocino crujiente.",
+    "price": 4600,
+    "img": "/bg2-removebg-preview.png"
+  },
+  {
+    "title": "Vegetariana",
+    "desc": "Una opción vegetariana con una hamburguesa de garbanzos, espinacas, y queso de cabra.",
+    "price": 4800,
+    "img": "/bg3-removebg-preview.png"
+  }
+]
