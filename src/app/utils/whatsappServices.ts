@@ -1,9 +1,9 @@
-import type { BurgerPack } from "../types";
+import type { Burger } from "../types";
 
 const PHONE_NUMBER: string = "541123308771"
 const URL_API: string = "https://api.whatsapp.com/send?phone="
 
-export const sendMessage = (cart: BurgerPack[]) => {
+export const sendMessage = (cart: Burger[]) => {
   let order: string[] = [];
   let subTotal: number = 0
   

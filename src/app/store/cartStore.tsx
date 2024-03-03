@@ -1,17 +1,18 @@
 import { create } from "zustand";
-import type { Burger, BurgerPack } from "../types";
+import type { Burger } from "../types";
 
 interface State {
-  burgers: BurgerPack[];
+  burgers: Burger[];
   total: number;
 }
 
 interface Actions {
   addProd: (newProd: Burger) => void;
+  decreaseQuantity: (newProd: Burger) => void;
   deleteProd: (prod: Burger) => void;
 }
 
-const recalcProds: (burgerList: BurgerPack[]) => number = (burgerList) => {
+const recalcProds: (burgerList: Burger[]) => number = (burgerList) => {
   const totalOfProds = burgerList.reduce((acc, pack) => {
     return (acc += pack.quantity);
   }, 0);
@@ -22,7 +23,7 @@ export const useCartStore = create<State & Actions>((set, get) => ({
   burgers: [],
   total: 0,
   addProd: (newProd) => {
-    const currentBurgers: BurgerPack[] = get().burgers;
+    const currentBurgers: Burger[] = get().burgers;
     const isProductExist: number = currentBurgers.findIndex(
       (burger) => newProd.title === burger.title
     );
@@ -37,14 +38,27 @@ export const useCartStore = create<State & Actions>((set, get) => ({
     }
     set({ total: recalcProds(get().burgers) });
   },
+
+  decreaseQuantity: (prod) => {
+    if (prod.quantity <= 1) return;
+
+    const newProdList: Burger[] = get().burgers.map((burger) => {
+      if (prod.title === burger.title) {
+        if (burger.quantity > 1)
+          return { ...burger, quantity: (burger.quantity -= 1) };
+      }
+      return burger;
+    });
+    set({ burgers: newProdList });
+    set({ total: recalcProds(get().burgers) });
+  },
+
   deleteProd: (prod) => {
     const burguerList = get().burgers;
     const newBurguerList = burguerList.filter(
       (burger: Burger) => burger.title !== prod.title
     );
     set({ burgers: newBurguerList });
-  },
-  recalculateProds: () => {
-    console.log("hola");
+    set({ total: recalcProds(get().burgers) });
   },
 }));

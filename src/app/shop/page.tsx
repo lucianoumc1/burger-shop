@@ -1,21 +1,12 @@
 "use client";
 import burgers from "@/app/utils/dataBurguer.json";
-import type { Burger, BurgerPack } from "../types";
+import type { Burger } from "../types";
 
 import Card from "../components/Card";
-import { useCartStore } from "../store/cartStore";
 import PrimaryButton from "../components/PrimaryButton";
-import { sendMessage } from "@/app/utils/whatsappServices";
 
 export default function ShopPage() {
   const burguerList: Burger[] = burgers;
-
-  const cart: BurgerPack[] = useCartStore((state) => state.burgers);
-
-  const handleSend = () => {
-    const link = sendMessage(cart);
-    window.location.assign(link);
-  };
 
   return (
     <main className="w-full my-10">
@@ -29,9 +20,6 @@ export default function ShopPage() {
           </div>
         ))}
       </section>
-      <div className="text-center mt-14">
-        <PrimaryButton text="Enviar" handleClick={handleSend} />
-      </div>
     </main>
   );
 }

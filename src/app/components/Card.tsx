@@ -1,9 +1,54 @@
+import { useState } from "react";
 import Image from "next/image";
 
 import PrimaryButton from "./PrimaryButton";
 import type { Burger } from "../types";
 import { useCartStore } from "@/app/store/cartStore";
-import { before } from "node:test";
+
+interface ButtonProps {
+  text: string;
+  callBack?: () => void;
+}
+function ButtonCard({ text, callBack }: ButtonProps) {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    callBack && callBack();
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 500);
+  };
+
+  return (
+    <button
+      type="button"
+      className={`py-2 px-6 rounded-xl font-semibold text-white  ${
+        isClicked ? "bg-green-500" : "bg-blue-600"
+      }`}
+      onClick={handleClick}
+    >
+      {isClicked ? (
+        <svg
+          className="h-5 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+      ) : (
+        text
+      )}
+    </button>
+  );
+}
 
 export default function Card(burger: Burger) {
   const addProd = useCartStore((state) => state.addProd);
@@ -42,7 +87,7 @@ export default function Card(burger: Burger) {
           </p>
           <div className="font-bold text-lg my-2">$ {burger.price}</div>
           <div className="self-center text-white font-bold ">
-            <PrimaryButton text="+" handleClick={handleAddProd} />
+            <ButtonCard text="+" callBack={handleAddProd} />
           </div>
         </div>
       </div>
