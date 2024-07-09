@@ -22,17 +22,17 @@ const recalcProds: (burgerList: Burger[]) => number = (burgerList) => {
 export const useCartStore = create<State & Actions>((set, get) => ({
   burgers: [],
   total: 0,
-  addProd: (newProd) => {
+  addProd: (newProd: Burger) => {
     const currentBurgers: Burger[] = get().burgers;
-    const isProductExist: number = currentBurgers.findIndex(
+    const prodIndex: number = currentBurgers.findIndex(
       (burger) => newProd.title === burger.title
     );
-    if (isProductExist >= 0) {
-      currentBurgers[isProductExist].quantity += 1;
+    if (prodIndex >= 0) {
+      currentBurgers[prodIndex].quantity += 1;
 
       set({ burgers: currentBurgers });
     } else {
-      set((state: State) => ({
+      set((state) => ({
         burgers: [...state.burgers, { ...newProd, quantity: 1 }],
       }));
     }

@@ -64,7 +64,6 @@ function CartItem({ product }: Props) {
   };
 
   const aditionals = ["cebolla", "bacon", "queso"];
-  }
 
   return (
     <div
@@ -92,12 +91,6 @@ function CartItem({ product }: Props) {
       >
         <span>❌</span>
       </button>
-
-      <section>
-        <div>
-          <input type="radio" name="" id="" />
-        </div>
-      </section>
     </div>
   );
 }
