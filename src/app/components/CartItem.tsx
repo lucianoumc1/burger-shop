@@ -63,6 +63,9 @@ function CartItem({ product }: Props) {
     deleteProduct(product);
   };
 
+  const aditionals = ["cebolla", "bacon", "queso"];
+  }
+
   return (
     <div
       className={`w-full h-14 p-4 pr-0 flex items-center gap-x-3 flex-nowrap text-xs overflow-hidden`}
@@ -89,6 +92,12 @@ function CartItem({ product }: Props) {
       >
         <span>❌</span>
       </button>
+
+      <section>
+        <div>
+          <input type="radio" name="" id="" />
+        </div>
+      </section>
     </div>
   );
 }
