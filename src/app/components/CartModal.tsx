@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { Burger } from "../types";
 
 import CartItem from "./CartItem";
@@ -11,7 +11,8 @@ function CartModal() {
 
   const [openModal, setOpenModal] = useState(false);
 
-  const handleCloseModal = (openModal: boolean) => setOpenModal(!openModal);
+  const handleCloseModal: MouseEventHandler<HTMLButtonElement> = () =>
+    setOpenModal(false);
 
   const subTotal: number = cart.reduce((acc: number, brg: Burger) => {
     return (acc += brg.price * brg.quantity);

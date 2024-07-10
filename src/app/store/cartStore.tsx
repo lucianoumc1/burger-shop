@@ -39,7 +39,7 @@ export const useCartStore = create<State & Actions>((set, get) => ({
     set({ total: recalcProds(get().burgers) });
   },
 
-  decreaseQuantity: (prod) => {
+  decreaseQuantity: (prod: Burger) => {
     if (prod.quantity <= 1) return;
 
     const newProdList: Burger[] = get().burgers.map((burger) => {
