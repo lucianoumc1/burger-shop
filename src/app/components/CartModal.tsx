@@ -1,16 +1,17 @@
+import { useState } from "react";
 import { Burger } from "../types";
 
 import CartItem from "./CartItem";
 import { useCartStore } from "../store/cartStore";
-import { sendMessage } from "@/app/utils/whatsappServices";
+import ClientDataForm from "./ClientDataForm";
+import Modal from "./Modal";
 
 function CartModal() {
   const cart: Burger[] = useCartStore((state) => state.burgers);
 
-  const handleSend = () => {
-    const link = sendMessage(cart);
-    window.location.assign(link);
-  };
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleCloseModal = (openModal: boolean) => setOpenModal(!openModal);
 
   const subTotal: number = cart.reduce((acc: number, brg: Burger) => {
     return (acc += brg.price * brg.quantity);
@@ -34,10 +35,13 @@ function CartModal() {
         <button
           type="button"
           className="text-white bg-blue-600 text-center text-sm font-bold w-full h-8"
-          onClick={handleSend}
+          onClick={() => setOpenModal(true)}
         >
           Enviar
         </button>
+        <Modal isOpen={openModal}>
+          <ClientDataForm handleCloseModal={handleCloseModal} />
+        </Modal>
       </div>
     </section>
   );

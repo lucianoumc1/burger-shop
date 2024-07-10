@@ -1,0 +1,15 @@
+.checked-style {
+  color: white;
+  border: 2px solid white;
+}
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"]:checked + .checked-style {
+  background-color: white;
+  color: rgb(8 145 178);
+}
+/* input[type="radio"]:checked + .checked-style {
+  background-color: rgb(37 99 235);
+  color: white;
+} */
