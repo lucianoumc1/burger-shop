@@ -3,5 +3,5 @@ export interface Burger {
   desc: string;
   price: number;
   img: string;
-  quantity: number;
+  quantity?: number;
 }
